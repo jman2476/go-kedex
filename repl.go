@@ -13,30 +13,18 @@ type cliCommand struct {
 	callback    func() error
 }
 
-var registry = map[string]cliCommand{
-	// "exit": {
-	// 	name:        "exit",
-	// 	description: "Exit the Pokedex",
-	// 	callback:    commandExit,
-	// },
-	// "help": {
-	// 	name:        "help",
-	// 	description: "Displays a help message",
-	// 	callback:    commandHelp,
-	// },
-}
-
-func init() {
-	registry["exit"] = cliCommand{
-		name:        "exit",
-		description: "Exit the Pokedex",
-		callback:    commandExit,
-	}
-	registry["help"] = cliCommand{
-		name:        "help",
-		description: "Displays a help message",
-		callback:    commandHelp,
-	}
+func getCommands() map[string]cliCommand {
+	return map[string]cliCommand{
+		"exit": {
+			name:        "exit",
+			description: "Exit the Pokedex",
+			callback:    commandExit,
+		},
+		"help": {
+			name:        "help",
+			description: "Displays a help message",
+			callback:    commandHelp,
+		}}
 }
 
 func startRepl() {
@@ -45,13 +33,25 @@ func startRepl() {
 	for {
 		fmt.Print("Pokedex > ")
 		scanner.Scan()
-		text := scanner.Text()
-		cleaned := cleanInput(text)
-		command, ok := registry[cleaned[0]]
+		cleanedInput := cleanInput(scanner.Text())
+
+		if len(cleanedInput) == 0 {
+			continue
+		}
+
+		commandName := cleanedInput[0]
+
+		command, ok := getCommands()[commandName]
 		if ok {
-			command.callback()
+			err := command.callback()
+
+			if err != nil {
+				fmt.Println(err)
+			}
+			continue
 		} else {
 			fmt.Println("Unknown command")
+			continue
 		}
 	}
 }
@@ -59,19 +59,4 @@ func startRepl() {
 func cleanInput(text string) []string {
 	lowered := strings.ToLower(text)
 	return strings.Fields(lowered)
-}
-
-func commandExit() error {
-	fmt.Println("Closing the Pokedex... Goodbye!")
-	os.Exit(0)
-	return nil
-}
-
-func commandHelp() error {
-	fmt.Printf("Welcome to the Pokedex!\nUsage:\n\n")
-
-	for _, command := range registry {
-		fmt.Printf("%s: %s\n", command.name, command.description)
-	}
-	return nil
 }
