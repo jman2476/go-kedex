@@ -9,14 +9,14 @@ import (
 func commandMap(c *config) error {
 	// get next 20 map locations
 	var locationAreas apicaller.LocationAreas
-	locationAreas, err := apicaller.GetMaps(c.Next)
+	locationAreas, err := c.client.GetMaps(c.Next)
 
 	if err != nil {
 		return fmt.Errorf("Error getting maps: %w", err)
 	}
 
-	(*c).Next = locationAreas.Next
-	(*c).Previous = locationAreas.Previous
+	c.Next = locationAreas.Next
+	c.Previous = locationAreas.Previous
 
 	for _, area := range locationAreas.Results {
 		fmt.Println(area.Name)
@@ -26,19 +26,19 @@ func commandMap(c *config) error {
 
 func commandMapB(c *config) error {
 	// get previous 20 map locations
-	if (*c).Previous == "" {
+	if c.Previous == nil {
 		fmt.Println("You are on the first page of results")
 		return nil
 	}
 	var locationAreas apicaller.LocationAreas
-	locationAreas, err := apicaller.GetMaps(c.Previous)
+	locationAreas, err := c.client.GetMaps(c.Previous)
 
 	if err != nil {
 		return fmt.Errorf("Error getting maps: %w", err)
 	}
 
-	(*c).Next = locationAreas.Next
-	(*c).Previous = locationAreas.Previous
+	c.Next = locationAreas.Next
+	c.Previous = locationAreas.Previous
 
 	for _, area := range locationAreas.Results {
 		fmt.Println(area.Name)

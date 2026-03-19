@@ -7,13 +7,8 @@ import (
 	"strings"
 )
 
-func startRepl() {
+func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
-
-	var config = config{
-		Next:     "https://pokeapi.co/api/v2/location-area/",
-		Previous: "",
-	}
 
 	for {
 		fmt.Print("Pokedex > ")
@@ -28,7 +23,7 @@ func startRepl() {
 
 		command, ok := getCommands()[commandName]
 		if ok {
-			err := command.callback(&config)
+			err := command.callback(cfg)
 
 			if err != nil {
 				fmt.Println(err)
