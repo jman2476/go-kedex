@@ -20,10 +20,14 @@ func startRepl(cfg *config) {
 		}
 
 		commandName := cleanedInput[0]
+		var commandArgument string
+		if len(cleanedInput) > 1 {
+			commandArgument = cleanedInput[1]
+		}
 
 		command, ok := getCommands()[commandName]
 		if ok {
-			err := command.callback(cfg)
+			err := command.callback(cfg, commandArgument)
 
 			if err != nil {
 				fmt.Println(err)

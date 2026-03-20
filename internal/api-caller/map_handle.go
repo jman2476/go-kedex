@@ -6,18 +6,6 @@ import (
 	"net/http"
 )
 
-type LocationAreas struct {
-	Count    int
-	Next     *string
-	Previous *string
-	Results  []Area
-}
-
-type Area struct {
-	Name string
-	Url  string
-}
-
 func (c *Client) GetMaps(url *string) (LocationAreas, error) {
 	fullURL := baseURL + "/location-area"
 	if url != nil {
