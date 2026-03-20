@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func commandHelp(c *config) error {
+func commandHelp(c *config, _ string) error {
 	fmt.Printf("Welcome to the Pokedex!\nUsage:\n\n")
 
 	for _, command := range getCommands() {

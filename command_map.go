@@ -6,7 +6,7 @@ import (
 	apicaller "github.com/jman2476/go-kedex/internal/api-caller"
 )
 
-func commandMap(c *config) error {
+func commandMap(c *config, _ string) error {
 	// get next 20 map locations
 	var locationAreas apicaller.LocationAreas
 	locationAreas, err := c.client.GetMaps(c.Next)
@@ -24,7 +24,7 @@ func commandMap(c *config) error {
 	return nil
 }
 
-func commandMapB(c *config) error {
+func commandMapB(c *config, _ string) error {
 	// get previous 20 map locations
 	if c.Previous == nil {
 		fmt.Println("You are on the first page of results")

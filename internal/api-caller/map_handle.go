@@ -41,8 +41,6 @@ func (c *Client) GetMaps(url *string) (LocationAreas, error) {
 		if err != nil {
 			return LocationAreas{}, err
 		}
-
-		c.cache.Add(fullURL, data)
 	}
 
 	var locations LocationAreas
@@ -51,5 +49,6 @@ func (c *Client) GetMaps(url *string) (LocationAreas, error) {
 		return LocationAreas{}, err
 	}
 
+	c.cache.Add(fullURL, data)
 	return locations, nil
 }
