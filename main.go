@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	pokedexClient := apicaller.NewClient(5 * time.Second)
+	pokedexClient := apicaller.NewClient(5*time.Second, 5*time.Minute)
 
 	cfg := &config{
 		client: pokedexClient,
