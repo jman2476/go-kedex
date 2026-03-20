@@ -24,24 +24,29 @@ func (c *Client) GetMaps(url *string) (LocationAreas, error) {
 		fullURL = *url
 	}
 
-	req, err := http.NewRequest("GET", fullURL, nil)
-	if err != nil {
-		return LocationAreas{}, nil
-	}
+	data, ok := c.cache.Get(fullURL)
+	if !ok {
+		req, err := http.NewRequest("GET", fullURL, nil)
+		if err != nil {
+			return LocationAreas{}, nil
+		}
 
-	res, err := c.httpClient.Do(req)
-	if err != nil {
-		return LocationAreas{}, err
-	}
-	defer res.Body.Close()
+		res, err := c.httpClient.Do(req)
+		if err != nil {
+			return LocationAreas{}, err
+		}
+		defer res.Body.Close()
 
-	data, err := io.ReadAll(res.Body)
-	if err != nil {
-		return LocationAreas{}, err
+		data, err = io.ReadAll(res.Body)
+		if err != nil {
+			return LocationAreas{}, err
+		}
+
+		c.cache.Add(fullURL, data)
 	}
 
 	var locations LocationAreas
-	err = json.Unmarshal(data, &locations)
+	err := json.Unmarshal(data, &locations)
 	if err != nil {
 		return LocationAreas{}, err
 	}

@@ -1,6 +1,8 @@
 package pokecache
 
-import "time"
+import (
+	"time"
+)
 
 func (c Cache) Add(key string, val []byte) {
 	c.mu.Lock()
@@ -32,8 +34,8 @@ func (c Cache) reapLoop() {
 			t := <-ticker.C
 			if t.Sub(entry.createdAt) > c.interval {
 				c.mu.Lock()
-				defer c.mu.Unlock()
 				delete(c.entries, key)
+				c.mu.Unlock()
 			}
 		}
 	}
