@@ -6,4 +6,5 @@ type config struct {
 	client   apicaller.Client
 	Next     *string
 	Previous *string
+	Pokedex  map[string]apicaller.PokemonInfo
 }
