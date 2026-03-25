@@ -5,13 +5,11 @@ import (
 	"fmt"
 	"os"
 	"strings"
-
-	apicaller "github.com/jman2476/go-kedex/internal/api-caller"
 )
 
 func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
-	cfg.Pokedex = make(map[string]apicaller.PokemonInfo)
+	// cfg.Pokedex = make(map[string]apicaller.PokemonInfo)
 
 	for {
 		fmt.Print("Pokedex > ")

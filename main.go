@@ -10,7 +10,8 @@ func main() {
 	pokedexClient := apicaller.NewClient(5*time.Second, 5*time.Minute)
 
 	cfg := &config{
-		client: pokedexClient,
+		client:  pokedexClient,
+		Pokedex: map[string]apicaller.PokemonInfo{},
 	}
 
 	startRepl(cfg)
