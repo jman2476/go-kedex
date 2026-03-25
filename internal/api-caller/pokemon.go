@@ -14,15 +14,38 @@ type PokemonEncounters struct {
 
 type PokemonInfo struct {
 	Name           string `json:"name"`
+	ID             int    `json:"id"`
 	BaseExperience int    `json:"base_experience"`
-	Stats          []Stat `json:"stats"`
-}
-
-type Stat struct {
-	BaseStat int `json:"base_stat"`
-	Effort   int `json:"effort"`
-	Stat     struct {
-		Name string `json:"name"`
-		Url  string `json:"url"`
-	}
+	Stats          []struct {
+		BaseStat int `json:"base_stat"`
+		Effort   int `json:"effort"`
+		Stat     struct {
+			Name string `json:"name"`
+			Url  string `json:"url"`
+		}
+	} `json:"stats"`
+	Height     int  `json:"height"`
+	Weight     int  `json:"weight"`
+	Is_default bool `json:"is_default"`
+	Abilities  []struct {
+		IsHidden bool `json:"is_hidden"`
+		Slot     int  `json:"slot"`
+		Ability  struct {
+			Name string `json:"name"`
+			Url  string `json:"url"`
+		} `json:"ability"`
+	} `json:"abilities"`
+	Moves []struct {
+		Move struct {
+			Name string `json:"name"`
+			Url  string `json:"url"`
+		} `json:"move"`
+	} `json:"moves"`
+	Types []struct {
+		Slot int `json:"slot"`
+		Type struct {
+			Name string `json:"name"`
+			Url  string `json:"url"`
+		} `json:"type"`
+	} `json:"types"`
 }
