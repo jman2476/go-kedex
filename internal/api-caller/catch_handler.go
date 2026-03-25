@@ -2,6 +2,7 @@ package apicaller
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 )
@@ -21,6 +22,10 @@ func (c *Client) GetPokemonData(pokemon string) (PokemonInfo, error) {
 			return PokemonInfo{}, err
 		}
 		defer res.Body.Close()
+
+		if res.StatusCode != 200 {
+			return PokemonInfo{}, fmt.Errorf("Pokemon not found, status: %s", res.Status)
+		}
 
 		data, err = io.ReadAll(res.Body)
 		if err != nil {

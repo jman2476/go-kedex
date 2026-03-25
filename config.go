@@ -7,5 +7,5 @@ type config struct {
 	Next     *string
 	Previous *string
 	Pokedex  map[string]apicaller.PokemonInfo
-	trainer  string
+	Trainer  string
 }

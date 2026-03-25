@@ -7,9 +7,13 @@ import (
 )
 
 func commandSave(c *config, trainer string) error {
-	filename := trainer + ".txt"
-	if c.trainer != "" {
-		filename = c.trainer + ".txt"
+	if trainer == "" && c.Trainer == "" {
+		return fmt.Errorf("Use the 'trainer' command to name your trainer before saving your progress")
+	}
+
+	filename := trainer + ".json"
+	if c.Trainer != "" {
+		filename = c.Trainer + ".json"
 	}
 
 	data, err := json.Marshal(c)

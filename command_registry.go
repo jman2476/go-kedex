@@ -58,5 +58,10 @@ func getCommands() map[string]cliCommand {
 			description: "Save session of current or new trainer",
 			callback:    commandSave,
 		},
+		"load": {
+			name:        "load",
+			description: "Load a trainer session",
+			callback:    commandLoad,
+		},
 	}
 }
