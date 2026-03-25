@@ -53,5 +53,10 @@ func getCommands() map[string]cliCommand {
 			description: "Show your caught pokemon",
 			callback:    commandPokedex,
 		},
+		"save": {
+			name:        "save",
+			description: "Save session of current or new trainer",
+			callback:    commandSave,
+		},
 	}
 }
