@@ -12,7 +12,11 @@ func startRepl(cfg *config) {
 	// cfg.Pokedex = make(map[string]apicaller.PokemonInfo)
 
 	for {
-		fmt.Print("Pokedex > ")
+		prompt := "Pokedex"
+		if cfg.Trainer != "" {
+			prompt = cfg.Trainer + "'s Pokedex"
+		}
+		fmt.Printf("%s > ", prompt)
 		scanner.Scan()
 		cleanedInput := cleanInput(scanner.Text())
 
