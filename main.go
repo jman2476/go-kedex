@@ -1,8 +1,8 @@
 package main
 
 import (
-	"time"
 	"fmt"
+	"time"
 
 	apicaller "github.com/jman2476/go-kedex/internal/api-caller"
 )

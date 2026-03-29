@@ -18,9 +18,11 @@ func commandExplore(c *config, location string) error {
 	if err != nil {
 		return fmt.Errorf("Error getting pokemon: %w", err)
 	}
+	c.Location.Name = location
 
 	for _, encounter := range encounters.PokemonList {
 		fmt.Printf("%v\n", encounter.Pokemon.Name)
+		c.Location.Pokemon = append(c.Location.Pokemon, encounter.Pokemon.Name)
 	}
 
 	return nil

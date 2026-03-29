@@ -8,4 +8,8 @@ type config struct {
 	Previous *string
 	Pokedex  map[string]apicaller.PokemonInfo
 	Trainer  string
+	Location struct {
+		Pokemon []string
+		Name    string
+	}
 }
