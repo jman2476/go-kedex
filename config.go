@@ -12,4 +12,5 @@ type config struct {
 		Pokemon []string
 		Name    string
 	}
+	MapArea []string
 }

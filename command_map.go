@@ -18,6 +18,7 @@ func commandMap(c *config, _ string) error {
 	c.Next = locationAreas.Next
 	c.Previous = locationAreas.Previous
 
+	setMapArea(c, locationAreas.Results)
 	for _, area := range locationAreas.Results {
 		fmt.Println(area.Name)
 	}
@@ -40,8 +41,16 @@ func commandMapB(c *config, _ string) error {
 	c.Next = locationAreas.Next
 	c.Previous = locationAreas.Previous
 
+	setMapArea(c, locationAreas.Results)
 	for _, area := range locationAreas.Results {
 		fmt.Println(area.Name)
+	}
+	return nil
+}
+
+func setMapArea(c *config, results []apicaller.Area) error {
+	for _, area := range results {
+		c.MapArea = append(c.MapArea, area.Name)
 	}
 	return nil
 }

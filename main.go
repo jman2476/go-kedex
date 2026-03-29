@@ -17,7 +17,7 @@ func main() {
 
 	fmt.Println("Loading...")
 	fmt.Print("Getting Pokemons")
-	time.Sleep(8 * time.Second)
+	time.Sleep(2 * time.Second)
 	fmt.Println("\r\033[K\033[A\033[K\rReady!")
 
 	startRepl(cfg)

@@ -1,7 +1,6 @@
 package pokecache
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -22,10 +21,10 @@ func (c Cache) Get(key string) ([]byte, bool) {
 	entry, ok := c.entries[key]
 
 	if !ok {
-		fmt.Println("\n====Not using cached data====")
+		// fmt.Println("\n====Not using cached data====")
 		return nil, ok
-	} else {
-		fmt.Println("\n----Using cached data----")
+		// } else {
+		// 	fmt.Println("\n----Using cached data----")
 	}
 
 	return entry.val, ok

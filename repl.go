@@ -49,3 +49,36 @@ func cleanInput(text string) []string {
 	lowered := strings.ToLower(text)
 	return strings.Fields(lowered)
 }
+
+func scrollRepl(items []string, index int) (string, error) {
+	if index >= len(items) {
+		return "", fmt.Errorf("Index %d is out of range of slice", index)
+	}
+
+	menuScanner := bufio.NewScanner(os.Stdin)
+
+	for {
+		for idx, item := range items {
+			margin := "  "
+			if idx == index {
+				margin = "> "
+			}
+			fmt.Printf("%s%s\n", margin, item)
+		}
+		menuScanner.Scan()
+		ok, direction := parseArrow(menuScanner.Text())
+
+	}
+
+	return "", nil
+}
+
+func parseArrow(text string) (contains, direction bool) {
+	if strings.Contains(text, "^[[A") {
+		return true, true
+	}
+	if strings.Contains(text, "^[[B") {
+		return true, false
+	}
+	return false, false
+}

@@ -63,5 +63,10 @@ func getCommands() map[string]cliCommand {
 			description: "Load a trainer session",
 			callback:    commandLoad,
 		},
+		"where": {
+			name:        "where",
+			description: "Display current location",
+			callback:    commandWhere,
+		},
 	}
 }
